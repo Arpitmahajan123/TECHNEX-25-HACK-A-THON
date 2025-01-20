@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Safety Navigation System</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <style>
+        #map { height: 90vh; width: 100%; }
+        #alert {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ff4444;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="alert">
+        ⚠️ You are in a danger zone! Calculating safest route to nearest safe zone.
+    </div>
+    <div id="map">{{ map | safe }}</div>
+    <script>
+        // Show alert if in danger zone
+        window.onload = function() {
+            document.getElementById('alert').style.display = 'block';
+        }
+
+        // Simulate location updates (in real app, use Geolocation API)
+        setInterval(function() {
+            fetch('/update_location')
+                .then(response => response.json())
+                .then(data => console.log('Location updated'));
+        }, 10000);
+    </script>
+</body>
+</html>
