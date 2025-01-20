@@ -1,0 +1,16 @@
+{
+  "name": "hack-a-thon",
+  "version": "1.0.0",
+  "description": "Flutter Wala Hai Isme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Flutter",
+    "Flask",
+    "Python"
+  ],
+  "author": "CodeWarrior",
+  "license": "ISC"
+}
