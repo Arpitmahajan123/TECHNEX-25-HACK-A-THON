@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Priya Sharma",
+        "points": 2500,
+        "avatar": "https://randomuser.me/api/portraits/women/1.jpg",
+        "badges": ["Safety Shield", "Golden Trophy", "Rising Star", "Guardian Angel"]
+    },
+    {
+        "name": "Anita Patel",
+        "points": 2200,
+        "avatar": "https://randomuser.me/api/portraits/women/2.jpg",
+        "badges": ["Safety Shield", "Rising Star", "Guardian Angel"]
+    },
+    {
+        "name": "Meera Singh",
+        "points": 2000,
+        "avatar": "https://randomuser.me/api/portraits/women/3.jpg",
+        "badges": ["Safety Shield", "Rising Star"]
+    },
+    {
+        "name": "Ritu Verma",
+        "points": 1800,
+        "avatar": "https://randomuser.me/api/portraits/women/4.jpg",
+        "badges": ["Safety Shield", "Rising Star"]
+    },
+    {
+        "name": "Deepa Kumar",
+        "points": 1600,
+        "avatar": "https://randomuser.me/api/portraits/women/5.jpg",
+        "badges": ["Safety Shield"]
+    },
+    {
+        "name": "Anjali Gupta",
+        "points": 1400,
+        "avatar": "https://randomuser.me/api/portraits/women/6.jpg",
+        "badges": ["Safety Shield"]
+    },
+    {
+        "name": "Kavita Reddy",
+        "points": 1200,
+        "avatar": "https://randomuser.me/api/portraits/women/7.jpg",
+        "badges": ["Rising Star"]
+    },
+    {
+        "name": "Pooja Malhotra",
+        "points": 1000,
+        "avatar": "https://randomuser.me/api/portraits/women/8.jpg",
+        "badges": ["Rising Star"]
+    }
+]

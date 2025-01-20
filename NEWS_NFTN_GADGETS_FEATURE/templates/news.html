@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}News{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Filter News</h5>
+                <form id="newsFilterForm">
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="location" placeholder="Enter city or area">
+                    </div>
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="endDate">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div id="newsContainer">
+            <!-- News articles will be dynamically loaded here -->
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const newsFilterForm = document.getElementById('newsFilterForm');
+    const newsContainer = document.getElementById('newsContainer');
+
+    function loadNews(filters = {}) {
+        const queryParams = new URLSearchParams(filters);
+        fetch(`/api/news?${queryParams}`)
+            .then(response => response.json())
+            .then(news => {
+                newsContainer.innerHTML = '';
+                news.forEach(article => {
+                    const articleElement = document.createElement('div');
+                    articleElement.className = 'card mb-3';
+                    articleElement.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">${article.title}</h5>
+                            <p class="card-text">${article.content}</p>
+                            <div class="text-muted">
+                                <small>Location: ${article.location}</small>
+                                <br>
+                                <small>Date: ${article.date}</small>
+                            </div>
+                        </div>
+                    `;
+                    newsContainer.appendChild(articleElement);
+                });
+            });
+    }
+
+    newsFilterForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const filters = {
+            location: document.getElementById('location').value,
+            start_date: document.getElementById('startDate').value,
+            end_date: document.getElementById('endDate').value
+        };
+        loadNews(filters);
+    });
+
+    // Load initial news
+    loadNews();
+});
+</script>
+{% endblock %}

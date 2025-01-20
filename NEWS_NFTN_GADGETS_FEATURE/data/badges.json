@@ -1,0 +1,22 @@
+[
+    {
+        "badge_name": "Safety Shield",
+        "badge_image": "/static/images/safety_shield.png",
+        "description": "Awarded for completing safety awareness training"
+    },
+    {
+        "badge_name": "Golden Trophy",
+        "badge_image": "/static/images/golden_trophy.png",
+        "description": "Top contributor in community safety initiatives"
+    },
+    {
+        "badge_name": "Rising Star",
+        "badge_image": "/static/images/rising_star.png",
+        "description": "New member showing exceptional engagement"
+    },
+    {
+        "badge_name": "Guardian Angel",
+        "badge_image": "/static/images/guardian_angel.png",
+        "description": "Helped 10+ women in emergency situations"
+    }
+]

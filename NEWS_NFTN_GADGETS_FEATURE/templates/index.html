@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-4 mb-4">Welcome to New Gadget Portal</h1>
+            <p class="lead">Your one-stop destination for tech news, gadgets, and women-focused content.</p>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-newspaper text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h3 class="card-title h4">Women News</h3>
+                    <p class="card-text">Stay informed about women's achievements and issues in technology and society.</p>
+                    <a href="/women-news" class="btn btn-primary">Read News</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-lightning text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h3 class="card-title h4">Tech News</h3>
+                    <p class="card-text">Get the latest updates on technology trends and innovations.</p>
+                    <a href="/news" class="btn btn-primary">View Tech News</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-phone text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h3 class="card-title h4">Gadgets</h3>
+                    <p class="card-text">Discover and explore the latest tech gadgets and innovations.</p>
+                    <a href="/gadgets" class="btn btn-primary">Browse Gadgets</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-trophy text-primary mb-3" style="font-size: 2rem;"></i>
+                    <h3 class="card-title h4">Leaderboard</h3>
+                    <p class="card-text">See top contributors and trending content in our community.</p>
+                    <a href="/leaderboard" class="btn btn-primary">View Leaderboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4"><i class="bi bi-shield-check text-primary me-2"></i>Safety Resources</h4>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h5><i class="bi bi-telephone-fill text-primary me-2"></i>Emergency Services</h5>
+                            <p class="mb-1">Police: <strong>100</strong></p>
+                            <p>Women's Helpline: <strong>1091</strong></p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5><i class="bi bi-heart-pulse-fill text-primary me-2"></i>Medical Help</h5>
+                            <p class="mb-1">Ambulance: <strong>102</strong></p>
+                            <p>Medical Emergency: <strong>108</strong></p>
+                        </div>
+                        <div class="col-md-4">
+                            <h5><i class="bi bi-headset text-primary me-2"></i>Support Helplines</h5>
+                            <p class="mb-1">Domestic Violence: <strong>181</strong></p>
+                            <p>Child Helpline: <strong>1098</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

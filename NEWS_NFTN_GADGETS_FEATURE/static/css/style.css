@@ -1,0 +1,57 @@
+/* Custom styles for Women's Safety App */
+
+body {
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #fff !important;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: #333;
+}
+
+.badge {
+    font-size: 1em;
+    padding: 0.5em 1em;
+    margin: 0.2em;
+}
+
+/* News section styles */
+#newsContainer .card {
+    transition: transform 0.2s;
+}
+
+#newsContainer .card:hover {
+    transform: translateY(-2px);
+}
+
+/* Leaderboard styles */
+.share-btn {
+    transition: all 0.2s;
+}
+
+.share-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Gadget section styles */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+#cartContainer {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.remove-from-cart {
+    padding: 0.2rem 0.5rem;
+}

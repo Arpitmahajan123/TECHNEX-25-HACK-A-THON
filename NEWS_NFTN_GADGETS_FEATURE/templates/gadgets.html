@@ -1,0 +1,460 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<style>
+    /* Filter Section */
+    .filters {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    .filter-group {
+        margin-bottom: 15px;
+    }
+
+    .filter-group:last-child {
+        margin-bottom: 0;
+    }
+
+    /* Search Bar */
+    .search-bar {
+        position: relative;
+    }
+
+    .search-bar input {
+        padding-right: 40px;
+        border-radius: 25px;
+    }
+
+    .search-bar i {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+    }
+
+    /* Gadget Cards */
+    .gadget-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .gadget-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .gadget-card .card-img-top {
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .gadget-card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+
+    /* Cart Sidebar */
+    .cart-sidebar {
+        position: sticky;
+        top: 20px;
+        border-radius: 15px;
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Modal Styles */
+    .modal-content {
+        border-radius: 15px;
+        border: none;
+    }
+
+    .modal-header {
+        border-bottom: none;
+        padding: 20px 30px;
+    }
+
+    .modal-body {
+        padding: 0 30px 30px;
+    }
+
+    .usage-steps {
+        list-style-type: none;
+        padding: 0;
+        counter-reset: step;
+    }
+
+    .usage-steps li {
+        position: relative;
+        padding: 10px 0 10px 40px;
+        counter-increment: step;
+    }
+
+    .usage-steps li::before {
+        content: counter(step);
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 30px;
+        height: 30px;
+        background: #28a745;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .features-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .features-list li {
+        padding: 8px 0;
+        display: flex;
+        align-items: center;
+    }
+
+    .features-list li::before {
+        content: "✓";
+        color: #28a745;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    /* Stock Status */
+    .stock-status {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .in-stock {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+
+    .low-stock {
+        background: #fff3e0;
+        color: #ef6c00;
+    }
+
+    /* Notification */
+    .notification {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #28a745;
+        color: white;
+        padding: 12px 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        animation: slideIn 0.3s ease-out;
+        z-index: 1000;
+    }
+
+    @keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <!-- Filters Column -->
+        <div class="col-lg-3 mb-4">
+            <div class="filters">
+                <h5 class="mb-4">Filters</h5>
+                
+                <!-- Search -->
+                <div class="filter-group">
+                    <label class="form-label">Search</label>
+                    <div class="search-bar">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search gadgets...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="filter-group">
+                    <label class="form-label">Category</label>
+                    <div id="categoryFilters">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Price Range -->
+                <div class="filter-group">
+                    <label class="form-label">Price Range</label>
+                    <div class="d-flex gap-2">
+                        <input type="number" class="form-control" id="minPrice" placeholder="Min">
+                        <input type="number" class="form-control" id="maxPrice" placeholder="Max">
+                    </div>
+                </div>
+
+                <!-- Stock Status -->
+                <div class="filter-group">
+                    <label class="form-label">Availability</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="inStockOnly">
+                        <label class="form-check-label" for="inStockOnly">
+                            In Stock Only
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-lg-6">
+            <div class="row row-cols-1 row-cols-md-2 g-4" id="gadgets-container">
+                <!-- Gadgets will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Shopping Cart -->
+        <div class="col-lg-3">
+            <div class="cart-sidebar bg-white p-4">
+                <h4>Shopping Cart</h4>
+                <div id="cart-items">
+                    <!-- Cart items will be displayed here -->
+                </div>
+                <hr>
+                <div class="d-flex justify-content-between">
+                    <strong>Total:</strong>
+                    <span id="cart-total">₹0.00</span>
+                </div>
+                <button class="btn btn-success w-100 mt-3" onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Details Modal -->
+<div class="modal fade" id="productModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Content will be dynamically loaded -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Notification -->
+<div id="notification" class="notification" style="display: none;">
+    Item added to cart!
+</div>
+
+<script>
+    let gadgets = [];
+    let cart = [];
+    let productModal;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        productModal = new bootstrap.Modal(document.getElementById('productModal'));
+        
+        // Fetch gadgets data
+        fetch('/api/gadgets')
+            .then(response => response.json())
+            .then(data => {
+                gadgets = data;
+                setupFilters();
+                displayGadgets();
+            });
+
+        // Setup event listeners
+        document.getElementById('searchInput').addEventListener('input', filterGadgets);
+        document.getElementById('minPrice').addEventListener('input', filterGadgets);
+        document.getElementById('maxPrice').addEventListener('input', filterGadgets);
+        document.getElementById('inStockOnly').addEventListener('change', filterGadgets);
+    });
+
+    function setupFilters() {
+        // Get unique categories
+        const categories = [...new Set(gadgets.map(g => g.category))];
+        
+        // Create category checkboxes
+        const categoryFilters = document.getElementById('categoryFilters');
+        categories.forEach(category => {
+            const div = document.createElement('div');
+            div.className = 'form-check';
+            div.innerHTML = `
+                <input class="form-check-input category-filter" type="checkbox" 
+                       value="${category}" id="category-${category}">
+                <label class="form-check-label" for="category-${category}">
+                    ${category}
+                </label>
+            `;
+            categoryFilters.appendChild(div);
+        });
+
+        // Add event listeners to category checkboxes
+        document.querySelectorAll('.category-filter').forEach(checkbox => {
+            checkbox.addEventListener('change', filterGadgets);
+        });
+    }
+
+    function filterGadgets() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
+        const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+        const inStockOnly = document.getElementById('inStockOnly').checked;
+        const selectedCategories = Array.from(document.querySelectorAll('.category-filter:checked'))
+            .map(checkbox => checkbox.value);
+
+        const filtered = gadgets.filter(gadget => {
+            const matchesSearch = gadget.name.toLowerCase().includes(searchTerm) ||
+                                gadget.description.toLowerCase().includes(searchTerm);
+            const matchesPrice = gadget.price >= minPrice && gadget.price <= maxPrice;
+            const matchesStock = !inStockOnly || gadget.stock > 0;
+            const matchesCategory = selectedCategories.length === 0 || 
+                                  selectedCategories.includes(gadget.category);
+
+            return matchesSearch && matchesPrice && matchesStock && matchesCategory;
+        });
+
+        displayGadgets(filtered);
+    }
+
+    function displayGadgets(gadgetsToShow = gadgets) {
+        const container = document.getElementById('gadgets-container');
+        container.innerHTML = gadgetsToShow.map(gadget => `
+            <div class="col">
+                <div class="card gadget-card h-100" onclick="showProductDetails(${gadgets.indexOf(gadget)})">
+                    <img src="${gadget.image_url}" class="card-img-top" alt="${gadget.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${gadget.name}</h5>
+                        <p class="card-text">${gadget.description}</p>
+                        <div class="price mb-3">₹${gadget.price.toFixed(2)}</div>
+                        <div class="stock-status ${gadget.stock > 5 ? 'in-stock' : 'low-stock'}">
+                            ${gadget.stock > 5 ? 'In Stock' : gadget.stock > 0 ? 'Low Stock' : 'Out of Stock'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function showProductDetails(index) {
+        const gadget = gadgets[index];
+        const modal = document.getElementById('productModal');
+        
+        modal.querySelector('.modal-title').textContent = gadget.name;
+        modal.querySelector('.modal-body').innerHTML = `
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="${gadget.image_url}" class="img-fluid rounded" alt="${gadget.name}">
+                </div>
+                <div class="col-md-6">
+                    <h6 class="text-muted">${gadget.category}</h6>
+                    <p>${gadget.description}</p>
+                    <div class="price h4 mb-3">₹${gadget.price.toFixed(2)}</div>
+                    
+                    <div class="mb-4">
+                        <h6>Key Features:</h6>
+                        <ul class="features-list">
+                            ${gadget.features.map(feature => `<li>${feature}</li>`).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="stock-status ${gadget.stock > 5 ? 'in-stock' : 'low-stock'} mb-3">
+                        ${gadget.stock > 5 ? 'In Stock' : gadget.stock > 0 ? 'Low Stock' : 'Out of Stock'}
+                        (${gadget.stock} units available)
+                    </div>
+
+                    <div class="btn-group w-100">
+                        <button class="btn btn-outline-primary" onclick="addToCart(${index})">
+                            Add to Cart
+                        </button>
+                        <a href="${gadget.purchase_link}" class="btn btn-primary" target="_blank">
+                            Buy Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <h5>How to Use:</h5>
+                <ol class="usage-steps">
+                    ${gadget.usage_instructions.map(instruction => 
+                        `<li>${instruction}</li>`
+                    ).join('')}
+                </ol>
+            </div>
+        `;
+        
+        productModal.show();
+    }
+
+    function addToCart(index) {
+        const gadget = gadgets[index];
+        cart.push(gadget);
+        updateCart();
+        showNotification();
+        
+        // Close modal if open
+        const modal = bootstrap.Modal.getInstance(document.getElementById('productModal'));
+        if (modal) {
+            modal.hide();
+        }
+    }
+
+    function updateCart() {
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        
+        cartItems.innerHTML = cart.map(item => `
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span>${item.name}</span>
+                <span>₹${item.price.toFixed(2)}</span>
+            </div>
+        `).join('');
+        
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        cartTotal.textContent = `₹${total.toFixed(2)}`;
+    }
+
+    function showNotification() {
+        const notification = document.getElementById('notification');
+        notification.style.display = 'block';
+        setTimeout(() => {
+            notification.style.display = 'none';
+        }, 3000);
+    }
+
+    function checkout() {
+        if (cart.length === 0) {
+            alert('Your cart is empty!');
+            return;
+        }
+        alert('Thank you for your purchase!');
+        cart = [];
+        updateCart();
+    }
+</script>
+{% endblock %}

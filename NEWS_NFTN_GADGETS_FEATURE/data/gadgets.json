@@ -1,0 +1,94 @@
+[
+    {
+        "name": "Smart Safety Alarm",
+        "description": "Compact personal alarm with 130dB sound and LED light. Features one-click activation and durable construction.",
+        "usage_instructions": [
+            "Press and hold the power button for 2 seconds to turn on",
+            "Pull the pin to activate the 130dB alarm instantly",
+            "Built-in LED light can be activated with a double-press",
+            "Alarm will sound continuously until pin is reinserted",
+            "Replace batteries when LED indicator turns red"
+        ],
+        "price": 599.99,
+        "image_url": "https://m.media-amazon.com/images/I/61ZPChEecAL._AC_UF1000,1000_QL80_.jpg",
+        "purchase_link": "https://example.com/buy/smart_alarm",
+        "category": "Personal Alarms",
+        "stock": 15,
+        "features": [
+            "130dB Loud Siren",
+            "LED Emergency Light",
+            "Water-Resistant",
+            "Long Battery Life",
+            "Compact Design"
+        ]
+    },
+    {
+        "name": "GPS Safety Watch",
+        "description": "Smartwatch with SOS button, real-time location tracking, and emergency contact alerts. Water-resistant and long battery life.",
+        "usage_instructions": [
+            "Set up emergency contacts in the companion app",
+            "Press SOS button for 3 seconds to send emergency alert",
+            "Double tap screen to send location to trusted contacts",
+            "Swipe right for quick access to emergency services",
+            "Charge device when battery level drops below 20%"
+        ],
+        "price": 2499.99,
+        "image_url": "https://m.media-amazon.com/images/I/51DDMUwy4AL.jpg",
+        "purchase_link": "https://example.com/buy/gps_watch",
+        "category": "GPS Trackers",
+        "stock": 10,
+        "features": [
+            "Real-time GPS Tracking",
+            "SOS Emergency Button",
+            "Water-Resistant",
+            "7-Day Battery Life",
+            "Mobile App Integration"
+        ]
+    },
+    {
+        "name": "Defense Pepper Spray",
+        "description": "Non-lethal self-defense spray with UV marking dye. Compact size fits in purse or pocket. Range up to 10 feet.",
+        "usage_instructions": [
+            "Remove safety cap before use",
+            "Point nozzle away from yourself and towards threat",
+            "Press spray button firmly for 1-2 second bursts",
+            "Spray in a Z pattern for maximum effectiveness",
+            "Replace after expiration date or if partially used"
+        ],
+        "price": 399.99,
+        "image_url": "https://m.media-amazon.com/images/I/61kqjJ9kCoL.jpg",
+        "purchase_link": "https://example.com/buy/pepper_spray",
+        "category": "Self Defense",
+        "stock": 20,
+        "features": [
+            "UV Marking Dye",
+            "10ft Range",
+            "Compact Size",
+            "Safety Lock",
+            "Police-Grade Formula"
+        ]
+    },
+    {
+        "name": "Personal Safety Keychain",
+        "description": "Multifunctional keychain with built-in alarm, LED light, and emergency whistle. Perfect for everyday carry.",
+        "usage_instructions": [
+            "Attach to keys or bag for easy access",
+            "Press alarm button twice to activate siren",
+            "Hold light button for continuous LED illumination",
+            "Blow whistle firmly for emergency alert",
+            "Keep away from water and extreme temperatures"
+        ],
+        "price": 299.99,
+        "image_url": "https://image.made-in-china.com/202f0j00QSwhJMcBMzYK/130dB-Wireless-Sos-Button-Anti-Attack-Personal-Safety-Security-Keychain-Alarm-Devices-for-Women.webp",
+        "purchase_link": "https://example.com/buy/safety_keychain",
+        "category": "Personal Alarms",
+        "stock": 25,
+        "features": [
+            "120dB Alarm",
+            "LED Flashlight",
+            "Emergency Whistle",
+            "Reinforced Ring",
+            "Impact-Resistant"
+        ]
+    }
+]
