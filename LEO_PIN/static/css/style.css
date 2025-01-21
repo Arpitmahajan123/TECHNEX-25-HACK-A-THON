@@ -1,0 +1,267 @@
+/* Color Variables */
+:root {
+    --primary-blue: #00C6FF;
+    --primary-purple: #9B6BFF;
+    --primary-gradient: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+    --primary-yellow: #F9EC7E;
+    --primary-beige: #E3CCB2;
+    --primary-rose: #E26274;
+    --text-dark: #333333;
+    --text-medium: #666666;
+    --text-light: #999999;
+    --border-color: #eeeeee;
+    --background-light: #f8f9fa;
+    --white: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --success-bg: #d1f7c4;
+    --success-text: #2b622b;
+    --error-bg: #ffd1d1;
+    --error-text: #922b2b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, var(--primary-yellow), var(--primary-beige), var(--primary-rose));
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    width: 100%;
+    max-width: 450px;
+    position: relative;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: contain;
+    padding: 20px;
+    background: var(--white);
+    box-shadow: 0 4px 15px var(--shadow-color);
+    border: none;
+}
+
+.logo-container::after {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    z-index: -1;
+    opacity: 0.2;
+}
+
+h1 {
+    text-align: center;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 28px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.subtitle {
+    text-align: center;
+    color: var(--text-medium);
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 18px;
+}
+
+input, select {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: var(--background-light);
+    font-family: 'Poppins', sans-serif;
+}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--primary-purple);
+    background-color: var(--white);
+    box-shadow: 0 0 0 3px rgba(155, 107, 255, 0.1);
+}
+
+input::placeholder {
+    color: var(--text-light);
+}
+
+.input-hint {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    margin-left: 30px;
+}
+
+.login-btn, .register-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary-gradient);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.login-btn::before, .register-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.login-btn:hover::before, .register-btn:hover::before {
+    opacity: 1;
+}
+
+.login-btn:hover, .register-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(155, 107, 255, 0.3);
+}
+
+.login-btn i, .register-btn i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.login-btn:hover i, .register-btn:hover i {
+    transform: translateX(5px);
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 25px;
+    color: var(--text-medium);
+    font-size: 15px;
+}
+
+.form-footer a {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.form-footer a:hover {
+    opacity: 0.8;
+}
+
+.alert {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.alert-success {
+    background-color: var(--success-bg);
+    color: var(--success-text);
+    border: 1px solid #b8e5a5;
+}
+
+.alert-error {
+    background-color: var(--error-bg);
+    color: var(--error-text);
+    border: 1px solid #ffb8b8;
+}

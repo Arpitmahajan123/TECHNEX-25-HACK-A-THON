@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Main gradient -->
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F9EC7E"/>
+      <stop offset="50%" style="stop-color:#E3CCB2"/>
+      <stop offset="100%" style="stop-color:#E26274"/>
+    </linearGradient>
+    
+    <!-- Shield gradient -->
+    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E26274"/>
+      <stop offset="100%" style="stop-color:#F9EC7E"/>
+    </linearGradient>
+    
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    
+    <!-- Shadow effect -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background Shield -->
+  <path d="M120 30 
+           L40 70 
+           C40 70 40 140 120 210
+           C200 140 200 70 200 70
+           L120 30z" 
+        fill="none" 
+        stroke="url(#shieldGradient)" 
+        stroke-width="8"
+        opacity="0.2"/>
+  
+  <!-- Main Design Group -->
+  <g transform="translate(70, 50)" filter="url(#shadow)">
+    <!-- Woman figure -->
+    <circle cx="50" cy="40" r="20" 
+            fill="none" 
+            stroke="url(#mainGradient)" 
+            stroke-width="6"/>
+    <path d="M50,60 L50,100" 
+          stroke="url(#mainGradient)" 
+          stroke-width="6" 
+          fill="none"/>
+    
+    <!-- Protective hands -->
+    <path d="M0,70 
+             C10,40 30,30 50,30
+             C70,30 90,40 100,70" 
+          stroke="url(#mainGradient)" 
+          stroke-width="6" 
+          fill="none" 
+          stroke-linecap="round"/>
+    
+    <!-- Heart -->
+    <path d="M35,95 
+             C35,85 45,85 50,95
+             C55,85 65,85 65,95
+             C65,105 50,115 50,115
+             C50,115 35,105 35,95Z" 
+          fill="url(#mainGradient)"
+          filter="url(#glow)"/>
+  </g>
+  
+  <!-- Decorative circles -->
+  <circle cx="120" cy="120" r="100" 
+          stroke="url(#mainGradient)" 
+          stroke-width="2" 
+          fill="none" 
+          opacity="0.1"/>
+  <circle cx="120" cy="120" r="95" 
+          stroke="url(#mainGradient)" 
+          stroke-width="1" 
+          fill="none" 
+          opacity="0.1"/>
+</svg>

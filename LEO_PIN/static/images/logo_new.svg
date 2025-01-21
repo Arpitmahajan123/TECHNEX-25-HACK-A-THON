@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240" height="240" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Main gradient -->
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00C6FF"/>
+      <stop offset="100%" style="stop-color:#9B6BFF"/>
+    </linearGradient>
+    <!-- Glow filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background shield -->
+  <path d="M120 30 
+           L40 70 
+           C40 70 40 140 120 210
+           C200 140 200 70 200 70
+           L120 30z" 
+        fill="none" 
+        stroke="url(#logoGradient)" 
+        stroke-width="4"
+        opacity="0.2"/>
+
+  <!-- Central group -->
+  <g transform="translate(70, 60)" stroke="url(#logoGradient)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glow)">
+    <!-- Person figure -->
+    <circle cx="50" cy="40" r="16"/> <!-- Head -->
+    <path d="M50,56 L50,85"/> <!-- Body -->
+    <path d="M35,70 L65,70"/> <!-- Arms -->
+    
+    <!-- Protective hands -->
+    <path d="M10,60 
+             C0,50 0,30 10,20 
+             C20,10 40,10 50,20"
+          stroke-width="5"/>
+    
+    <path d="M90,60 
+             C100,50 100,30 90,20 
+             C80,10 60,10 50,20"
+          stroke-width="5"/>
+    
+    <!-- Heart shape -->
+    <path d="M35,95 
+             C35,85 45,85 50,95
+             C55,85 65,85 65,95
+             C65,105 50,115 50,115
+             C50,115 35,105 35,95Z"
+          stroke-width="4"/>
+  </g>
+  
+  <!-- Decorative circles -->
+  <circle cx="120" cy="120" r="90" stroke="url(#logoGradient)" stroke-width="2" fill="none" opacity="0.1"/>
+  <circle cx="120" cy="120" r="85" stroke="url(#logoGradient)" stroke-width="1" fill="none" opacity="0.1"/>
+</svg>
