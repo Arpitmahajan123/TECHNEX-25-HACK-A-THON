@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Contacts - Women Safety App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container emergency-container">
+        <h2>Emergency Contacts</h2>
+        <div class="emergency-sections">
+            <div class="section">
+                <h3>Police Stations</h3>
+                <div id="policeStations" class="contact-list">
+                    Loading nearby police stations...
+                </div>
+            </div>
+            <div class="section">
+                <h3>Hospitals</h3>
+                <div id="hospitals" class="contact-list">
+                    Loading nearby hospitals...
+                </div>
+            </div>
+            <div class="section">
+                <h3>Women's Organizations</h3>
+                <div id="organizations" class="contact-list">
+                    Loading nearby organizations...
+                </div>
+            </div>
+        </div>
+        <button onclick="window.location.href='/'" class="back-button">Back to Home</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/emergency.js') }}"></script>
+</body>
+</html>

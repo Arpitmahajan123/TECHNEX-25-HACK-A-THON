@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container text-center">
+    <h1 class="display-4 mb-4">Welcome to Women Safety App</h1>
+    <p class="lead">Your safety is our priority. Register now to access the SOS feature.</p>
+    
+    <div class="row mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">New User?</h5>
+                    <p class="card-text">Create an account to access all safety features.</p>
+                    <a href="{{ url_for('register') }}" class="btn btn-primary">Register Now</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Already Registered?</h5>
+                    <p class="card-text">Login to access your dashboard and SOS features.</p>
+                    <a href="{{ url_for('login') }}" class="btn btn-success">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

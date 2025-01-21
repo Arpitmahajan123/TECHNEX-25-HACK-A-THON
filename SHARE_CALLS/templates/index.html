@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women Safety App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo">
+                <svg width="200" height="200" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="95" fill="#ff69b4" />
+                    <path d="M100 40 C60 40 40 70 40 100 C40 140 70 160 100 160 C130 160 160 140 160 100 C160 70 140 40 100 40" fill="#fff"/>
+                    <circle cx="80" cy="90" r="10" fill="#ff69b4"/>
+                    <circle cx="120" cy="90" r="10" fill="#ff69b4"/>
+                    <path d="M70 120 Q100 140 130 120" stroke="#ff69b4" stroke-width="5" fill="none"/>
+                </svg>
+            </div>
+        </div>
+        <button id="shareButton" class="share-button">Share Location & Emergency Contacts</button>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

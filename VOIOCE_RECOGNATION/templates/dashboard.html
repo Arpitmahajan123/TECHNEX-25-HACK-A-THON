@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Welcome, {{ current_user.name }}</h3>
+            </div>
+            <div class="card-body text-center">
+                <div class="voice-recognition-container">
+                    <div id="voiceStatus" class="alert alert-info">
+                        <i class="fas fa-microphone"></i> Click the button below to start voice recognition
+                    </div>
+                    <button id="startVoiceBtn" class="btn btn-primary btn-lg mb-3">
+                        <i class="fas fa-microphone"></i> Start Voice Recognition
+                    </button>
+                    <div id="transcriptBox" class="alert alert-secondary d-none mb-3">
+                        <strong>Heard:</strong> <span id="transcriptText"></span>
+                    </div>
+                    <p class="mt-3">Say "help help" to trigger emergency alert</p>
+                    <div id="locationStatus" class="alert alert-info d-none">
+                        Sending emergency alert...
+                    </div>
+                    <div id="messageStatus" class="alert alert-success d-none">
+                        Alert sent successfully!
+                    </div>
+                    <div id="errorStatus" class="alert alert-danger d-none">
+                        Error sending alert. Please try again.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+const voiceStatus = document.getElementById('voiceStatus');
+const startVoiceBtn = document.getElementById('startVoiceBtn');
+const transcriptBox = document.getElementById('transcriptBox');
+const transcriptText = document.getElementById('transcriptText');
+const locationStatus = document.getElementById('locationStatus');
+const messageStatus = document.getElementById('messageStatus');
+const errorStatus = document.getElementById('errorStatus');
+
+let recognition = null;
+let isListening = false;
+
+function initializeSpeechRecognition() {
+    try {
+        // Try the standard Web Speech API first
+        if ('SpeechRecognition' in window) {
+            recognition = new SpeechRecognition();
+        } 
+        // Fall back to webkit prefixed version for Chrome
+        else if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+        } 
+        // If neither is available
+        else {
+            throw new Error('Speech recognition not supported');
+        }
+
+        // Configure recognition
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'en-US';
+
+        recognition.onstart = function() {
+            isListening = true;
+            voiceStatus.className = 'alert alert-info';
+            voiceStatus.innerHTML = '<i class="fas fa-microphone"></i> Listening for "help help"...';
+            startVoiceBtn.innerHTML = '<i class="fas fa-stop"></i> Stop Voice Recognition';
+            transcriptBox.classList.remove('d-none');
+            transcriptText.textContent = '';
+        };
+
+        recognition.onresult = function(event) {
+            let interimTranscript = '';
+            let finalTranscript = '';
+
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                const transcript = event.results[i][0].transcript.toLowerCase();
+                if (event.results[i].isFinal) {
+                    finalTranscript += transcript;
+                } else {
+                    interimTranscript += transcript;
+                }
+            }
+
+            // Show what's being heard
+            transcriptText.textContent = finalTranscript || interimTranscript;
+
+            // Check for trigger phrase
+            if (finalTranscript.includes('help help')) {
+                voiceStatus.className = 'alert alert-warning';
+                voiceStatus.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Alert Trigger Phrase Detected!';
+                sendSOS();
+                stopRecognition();
+            }
+        };
+
+        recognition.onerror = function(event) {
+            console.error('Speech recognition error:', event.error);
+            voiceStatus.className = 'alert alert-danger';
+            if (event.error === 'no-speech') {
+                voiceStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> No speech detected. Try again?';
+            } else {
+                voiceStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error: ' + event.error;
+            }
+            stopRecognition();
+        };
+
+        recognition.onend = function() {
+            if (isListening) {
+                // If we're supposed to be listening but recognition ended, restart it
+                recognition.start();
+            } else {
+                voiceStatus.className = 'alert alert-secondary';
+                voiceStatus.innerHTML = '<i class="fas fa-microphone-slash"></i> Voice Recognition Stopped';
+                startVoiceBtn.innerHTML = '<i class="fas fa-microphone"></i> Start Voice Recognition';
+                transcriptBox.classList.add('d-none');
+            }
+        };
+
+    } catch (error) {
+        console.error('Error initializing speech recognition:', error);
+        voiceStatus.className = 'alert alert-danger';
+        voiceStatus.innerHTML = '<i class="fas fa-exclamation-circle"></i> Speech Recognition not supported in this browser';
+        startVoiceBtn.disabled = true;
+    }
+}
+
+function stopRecognition() {
+    isListening = false;
+    if (recognition) {
+        recognition.stop();
+    }
+}
+
+startVoiceBtn.addEventListener('click', function() {
+    if (!recognition) {
+        initializeSpeechRecognition();
+    }
+
+    if (isListening) {
+        stopRecognition();
+    } else {
+        isListening = true;
+        recognition.start();
+    }
+});
+
+function sendSOS() {
+    locationStatus.classList.remove('d-none');
+    messageStatus.classList.add('d-none');
+    errorStatus.classList.add('d-none');
+
+    fetch('/send_sos', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        locationStatus.classList.add('d-none');
+        if (data.status === 'success') {
+            messageStatus.textContent = data.message;
+            messageStatus.classList.remove('d-none');
+        } else {
+            errorStatus.textContent = data.message;
+            errorStatus.classList.remove('d-none');
+        }
+    })
+    .catch(error => {
+        locationStatus.classList.add('d-none');
+        errorStatus.textContent = 'Failed to send alert. Please try again.';
+        errorStatus.classList.remove('d-none');
+        console.error('Error:', error);
+    });
+}
+
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', initializeSpeechRecognition);
+</script>
+{% endblock %}
